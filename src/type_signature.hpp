@@ -266,6 +266,21 @@ namespace type_signature {
         }
     };
 
+    template <>
+    struct TypeSignature<any_equivalent> {
+        static constexpr auto calculate() noexcept {
+            return CompileString{ "struct[s:" } +
+                CompileString<32>::from_number(sizeof(any_equivalent)) +
+                CompileString{ ",a:" } +
+                CompileString<32>::from_number(alignof(any_equivalent)) +
+                CompileString{ "]{@0:" } +
+                TypeSignature<void*>::calculate() +
+                CompileString{ ",@8:" } +
+                TypeSignature<char[ANY_SIZE]>::calculate() +
+                CompileString{ "}" };
+        }
+    };
+
     template <typename T, size_t I>
     struct FieldOffsetHelper {
         static constexpr size_t calculate() noexcept {

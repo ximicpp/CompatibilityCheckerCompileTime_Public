@@ -62,8 +62,8 @@ namespace test {
     static_assert(get_type_signature<void*>() == 
                  "ptr[s:8,a:8]");
     static_assert(get_type_signature<any_equivalent>() ==
-                 "struct[s:72,a:8]{@0:ptr[s:8,a:8],@8:ptr[s:8,a:8]}");
+                "struct[s:72,a:8]{@0:ptr[s:8,a:8],@8:bytes[s:64,a:1]}");
     static_assert(get_type_signature<DynamicStruct>() ==
-                 "map[s:24,a:8]<string[s:24,a:8],struct[s:72,a:8]{@0:ptr[s:8,a:8],@8:ptr[s:8,a:8]}>");
+                "map[s:24,a:8]<string[s:24,a:8],struct[s:72,a:8]{@0:ptr[s:8,a:8],@8:bytes[s:64,a:1]}>");
 
 } // namespace test
