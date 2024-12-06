@@ -56,7 +56,7 @@ namespace test {
                  "@16:string[s:24,a:8]}");
     
     static_assert(get_type_signature<TestType>() == 
-                 "struct[s:64,a:8]{@0:i32[s:41,a:4],"
+                 "struct[s:64,a:8]{@0:i32[s:4,a:4],"
                  "@8:struct[s:32,a:8]{@0:i32[s:4,a:4],@8:vector[s:24,a:8]<i32[s:4,a:4]>},"
                  "@40:map[s:24,a:8]<string[s:24,a:8],struct[s:32,a:8]{@0:i32[s:4,a:4],"
                  "@8:vector[s:24,a:8]<i32[s:4,a:4]>}>}");
