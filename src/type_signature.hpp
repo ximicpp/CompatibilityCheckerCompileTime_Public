@@ -141,11 +141,13 @@ namespace type_signature {
             return CompileString<new_size>(result);
         }
 
+        // 新添加的编译期比较操作符
         constexpr bool operator==(const char* other) const noexcept {
             size_t i = 0;
             while (i < N && value[i] != '\0' && other[i] != '\0') {
-                if (value[i] != other[i])
+                if (value[i] != other[i]) {
                     return false;
+                }
                 ++i;
             }
             return value[i] == other[i];
@@ -269,15 +271,16 @@ namespace type_signature {
     template <>
     struct TypeSignature<any_equivalent> {
         static constexpr auto calculate() noexcept {
-            return CompileString{ "struct[s:" } +
-                CompileString<32>::from_number(sizeof(any_equivalent)) +
-                CompileString{ ",a:" } +
-                CompileString<32>::from_number(alignof(any_equivalent)) +
-                CompileString{ "]{@0:" } +
-                TypeSignature<void*>::calculate() +
-                CompileString{ ",@8:" } +
-                TypeSignature<char[ANY_SIZE]>::calculate() +
-                CompileString{ "}" };
+            return CompileString{"struct[s:"} +
+                   CompileString<32>::from_number(sizeof(any_equivalent)) +
+                   CompileString{",a:"} +
+                   CompileString<32>::from_number(alignof(any_equivalent)) +
+                   CompileString{"]{"} +
+                   CompileString{"@0:"} +
+                   TypeSignature<void*>::calculate() +
+                   CompileString{",@8:"} +
+                   TypeSignature<char[ANY_SIZE]>::calculate() +
+                   CompileString{"}"};
         }
     };
 
@@ -343,9 +346,8 @@ namespace type_signature {
     };
 
     template <typename T>
-    [[nodiscard]] constexpr std::string_view get_type_signature() noexcept {
-        constexpr auto sig = TypeSignature<T>::calculate();
-        return std::string_view(sig.value);
+    [[nodiscard]] constexpr auto get_type_signature() noexcept {
+        return TypeSignature<T>::calculate();
     }
 
 } // namespace type_signature
