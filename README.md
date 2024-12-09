@@ -1,4 +1,4 @@
-# Type Signature Generator
+ # Type Signature Generator
 
 A C++ library for generating detailed type signatures at compile-time, providing type information including size, alignment, and structure layout.
 
@@ -107,19 +107,3 @@ The library includes static assertions to verify:
 - All type signatures are generated at compile-time with zero runtime overhead
 - Uses template metaprogramming and compile-time string manipulation
 - Leverages Boost.PFR for compile-time struct reflection
-
-### Platform Requirements
-- Supports Windows (MSVC) and Linux (GCC/Clang)
-- Requires proper structure alignment and packing
-- Platform-specific type sizes must match expected values
-
-## Important Notes
-
-1. Structure Layout:
-   - Ensure structures use correct alignment attributes
-   - Be aware that compiler optimizations may affect structure layout
-
-2. Type Constraints:
-   - All type sizes must be less than or equal to ANY_SIZE (64 bytes)
-   - Pointer size must be 8 bytes
-   - Basic type sizes must conform to standard requirements
